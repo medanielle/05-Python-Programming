@@ -175,35 +175,30 @@ negative, then Joe lost money
 '''
 
 def getBuySellInfo():
+    #function to get info from user on Cost per share, and num of shares for buy and sell
     buyTotal = (float(input("Enter number of shares purchased: "))  
         * float(input("Enter cost per share when purchased: ")))
 
     sellTotal = (float(input("Enter number of shares sold: "))
         * float(input("Enter cost per share when sold: ")))
-    print(f'{float(buyTotal)} , {float(sellTotal)}')
     return (buyTotal, sellTotal)
 
 def getMathAndOutput(buyTotal, sellTotal):
+    #function to compute math portions and Display outPut
     buyComm = buyTotal * .02
     sellComm = sellTotal * .02
     profit = sellTotal - buyTotal - sellComm - buyComm
 
+    #Display data
     print(f"\nThe total paid for the stock is ${buyTotal:.2f}\nThe buying commision \
     is ${buyComm:.2f}\nThe amount the stock sold for is ${sellTotal:.2f}\nThe selling \
     commision is ${sellComm:.2f}\n\nAmount of your money left is ${profit:.2f}")
 
+    #find out is profit was made or lost
     if profit > 0:
         print(f'You made a profit!')
     else:
         print(f"You lost money!")
+
 bTotal, sTotal = getBuySellInfo()
 getMathAndOutput(bTotal, sTotal)
-'''
-• The number of shares that Joe purchased was 1,000.
-• When Joe purchased the stock, he paid $32.87 per share.
-• Joe paid his stockbroker a commission that amounted to 2 percent of the amount he paid
-for the stock.
-Two weeks later Joe sold the stock. Here are the details of the sale:
-• The number of shares that Joe sold was 1,000.
-• He sold the stock for $33.92 per share.
-'''
