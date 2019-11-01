@@ -22,59 +22,27 @@ Programming Exercise 4.17 gives a program that plays the rock, paper, scissors g
 '''
 import random
 def rockPaperScissors():
+    #set 
     userWins = 0
     compWins = 0
+    compWinning = ['rockscissors', 'scissorspaper', 'paperrock']
+    userWinning = ['scissorsrock', 'paperscissors', 'rockpaper']
+    tie = ['scissorsscissors', 'paperpaper', 'rockrock']
     
-    while userWins < 2 or compWins < 2:
+    while userWins < 3 and compWins < 3:
         computerNum = random.randint(1, 3)
         userString = input("Enter 'rock', 'paper' or scissors': ")
-        userNum = getWordsToNum(userString)
         print(f"Computers choice was {getNumToWords(computerNum)}")
         oneString = getNumToWords(computerNum) + userString
-        print(oneString)
-        compWin = ['rockscissors', 'scissorspaper', 'paperrock']
-        userWin = ['scissorsrock', 'paperscissors', 'rockpaper']
-        tie = ['scissorsscissors', 'paperpaper', 'rockrock']
+        if oneString in compWinning:
+            print(f"The computer won!")
+            compWins += 1
+        elif oneString in userWinning:
+            print(f"The user won!")
+            userWins += 1
 
-        if oneString in compWin:
-            
-        # if computerNum == 1 and userNum == 3:
-        #     print(f"The computer won!")
-        #     c_won += 1
-        # elif computerNum == 3 and userNum == 1:
-        #     print(f"The user won!")
-        #     u_won += 1
-        # elif computerNum == 2 and userNum == 1:
-        #     print(f"The computer won!")
-        #     c_won += 1
-        # elif computerNum == 1 and userNum == 2:
-        #     print(f"The user won!")
-        #     u_won += 1
-        # elif computerNum == 3 and userNum == 2:
-        #     print(f"The computer won!")
-        #     c_won += 1
-        # elif computerNum == 2 and userNum == 3:
-        #     print(f"The user won!")
-        #     u_won += 1
-        else:
-            print(f"both players make the same choice, the game must be played again")
-            doAgain = "y"
-
-        if u_won > 2 or c_won >=2:
-            doAgain = 'n'
-
-def getWordsToNum(p_words):
-    num = 0
-    if p_words == "rock":
-        num = 1
-    elif p_words == "paper":
-        num = 2
-    elif p_words == "scissors":
-        num = 3
-    else:
-        print(f"Error invalid entry, try again!")
-        doAgain = "y"
-    return num
+        elif oneString in tie:
+            print(f"Its a TIE!")
 
 def getNumToWords(num):
     words = 'wrong'
@@ -86,7 +54,6 @@ def getNumToWords(num):
         words = "scissors"
     else:
         print(f"Error invalid entry, try again!")
-        doAgain = "y"
     return words
 
 rockPaperScissors()

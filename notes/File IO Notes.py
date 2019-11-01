@@ -149,16 +149,32 @@ def newDisplay():
         infile.close
     
     except IOError:
-        print('An error occured trying to read the file', filename)
+        print('An error occured trying to read the file:', filename)
 
-newDisplay()
+#newDisplay()
 
+def withoutClose():
+    with open('sales2.txt', 'r') as filer:
+        #contents = filer.read()
+        #print(contents)
+        for line in filer:
+            print(line, end ='')
 
+#withoutClose()
 
+def withoutCloseTWO():
+    with open('philo.txt', 'r') as filer:
+        size_to_read = 10
+        f_contents = filer.read(size_to_read)
+        #print(f_contents)
+
+        while len(f_contents) > 0:
+            print(f_contents, end='-')
+            f_contents = filer.read(size_to_read)
+
+#withoutCloseTWO()
     
-
-
 
 def firstExample():
     #file_variable = open(filename, mode)
-    file_variable = open(filename, mode)
+    f = open('file.txt', 'r')
