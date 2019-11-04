@@ -185,4 +185,4 @@ def pattern_draw():
         spaces += 1
         print(f'{pattern}')
 
-#pattern_draw()
+pattern_draw()

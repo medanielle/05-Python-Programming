@@ -1,6 +1,7 @@
 def first():
     #list syntax of even numbers
     even_number = [2, 4, 6, 8, 10]
+    print(even_number)
 
     #list of strings
     names = ['Hydrick', 'George', 'Ali', 'Howard']

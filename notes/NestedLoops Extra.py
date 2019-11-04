@@ -56,16 +56,32 @@ def getNumToWords(num):
         print(f"Error invalid entry, try again!")
     return words
 
-rockPaperScissors()
+#rockPaperScissors()
 
 '''
 3. (Turtle: draw circles)
 Write a program that draws 10 circles with centers (0, 0). Like below
 '''
+import turtle
+def drawCircles():
+    turtle.showturtle()
+    circum = 100
+    spot = -10
+    while circum < 150:
+        turtle.penup()
+        turtle.goto(0,spot)
+        turtle.pendown()
+        turtle.circle(circum)
+        circum += 10
+        spot -= 10
+
+drawCircles()
+
 '''
 4. (Turtle: display a multiplication table)
 Write a program that displays a multiplication table
 '''
+
 '''
 5. (Turtle: display a lattice)
 Write a program that displays an 18-by-18 lattice

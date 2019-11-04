@@ -172,9 +172,9 @@ def withoutCloseTWO():
             print(f_contents, end='-')
             f_contents = filer.read(size_to_read)
 
-#withoutCloseTWO()
+withoutCloseTWO()
     
 
-def firstExample():
+#def firstExample():
     #file_variable = open(filename, mode)
-    f = open('file.txt', 'r')
+        #f = open('file.txt', 'r')
