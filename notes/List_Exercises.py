@@ -208,10 +208,8 @@ def getRandMatrix():
         index += 1
     print(f'Largest Col: {c_largest}')
 
-    #for i in range(len(r_largest)-1):
-    #    pintdkjfjfdkkjdsfkjdfjk
-
 #getRandMatrix()
+
 '''
 def getMatrixPrint(p_matrix):
     print('The matrix is')
@@ -251,6 +249,7 @@ The program prompts two players to alternately enter an X token and an O
 token. Whenever a token is entered, the program redisplays the board on the
 console and determines the status of the game (win, draw, or continue).
 '''
+
 import re
 def getTicTacToe():
     grid = [['e', 'e', 'e'], ['e', 'e', 'e'], ['e', 'e', 'e']]
@@ -269,7 +268,7 @@ def getInput(p_player, p_sign, p_grid):
     for item in p_grid:
         print(item)
     row, col = int(input(f'Player {p_player} Row: ')), int(input(f'Player {p_player} Column: '))
-    while row > 2 or row < 0 or col > 2 or col < 0
+    while row > 2 or row < 0 or col > 2 or col < 0:
         print('Try Again! Number must be (0-2)')
         row, col = int(input(f'Player {p_player} Row (0-2): ')), int(input(f'Player {p_player} Column (0-2): '))
     while p_grid[row][col] != 'e':
@@ -287,10 +286,7 @@ def getWinner(p_grid, p_player):
     if re.search('[XO]...[XO]...[XO]', answer):
         print(f'Player {p_player} wins!')
         winner = True
-        # elif re.search('O...O...O', answer):
-        #     print('Player 2 wins!')
-        #     winner = True
-    #diagonal
+    #diagonal2
     if re.search('..[XO].[XO].[XO]..', answer):
         print(f'Player {p_player} wins!')
         winner = True
@@ -298,50 +294,28 @@ def getWinner(p_grid, p_player):
     elif re.search('[XO][XO][XO]......', answer):
         print(f'Player {p_player} wins!')
         winner = True
-        # elif re.search('OOO......', answer):
-        #     print('Player 2 wins!')
-        #     winner = True
     #row2
     elif re.search('...[XO][XO][XO]...', answer):
         print(f'Player {p_player} wins!')
         winner = True
-        # elif re.search('...OOO...', answer):
-        #     print('Player 2 wins!')
-        #     return True
     #row3
     elif re.search('......[XO][XO][XO]', answer):
         print(f'Player {p_player} wins!')
         winner = True
-        # elif re.search('......OOO', answer):
-        #     print('Player 2 wins!')
-        #     winner = True
     #col1
     elif re.search('[XO]..[XO]..[XO]..', answer):
         print(f'Player {p_player} wins!')
         winner = True
-        # elif re.search('O..O..O..', answer):
-        #     print('Player 2 wins!')
-        #     winner = True
     #col2
     elif re.search('.[XO]..[XO]..[XO].', answer):
         print(f'Player {p_player} wins!')
         winner = True
-        # elif re.search('.O..O..O.', answer):
-        #     print('Player 2 wins!')
-        #     winner = True
     #col3
     elif re.search('..[XO]..[XO]..[XO]', answer):
         print(f'Player {p_player} wins!')
         winner = True
-        # elif re.search('..O..O..O', answer):
-        #     print('Player 2 wins!')
-        #     winner = True
     else:
         winner = False
     return winner
-    
-    
-
-
 
 getTicTacToe()
