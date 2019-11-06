@@ -38,8 +38,11 @@ def getCourseInfo():
     instruct_dict = {'CS101': 'Haynes', 'CS102': 'Alvarado', 'CS103': 'Rich', 'NT110': 'Burke', 'CM241': 'Lee'}
     time_dict = {'CS101': '8:00 a.m.', 'CS102': '9:00 a.m.', 'CS103': '10:00 a.m.',
                  'NT110': '11:00 a.m.', 'CM241': '1:00 p.m.'}
-
-    course = input(f'Enter Course Number for info. Choose from:\n{room_dict.keys()}\n\nCourse Code: ')
+    course = 'CS101'
+    while course not in room_dict.keys():
+        course = input(f'Enter Course Number for info. Choose from:\n{room_dict.keys()}\n\nCourse Code: ')
+        if course not in room_dict.keys():
+            print('Not a vaild')
     print(f'Room Number: {room_dict[course]}\nInstructor: {instruct_dict[course]}\nTime: {time_dict[course]}')
 
 #getCourseInfo()
@@ -126,6 +129,7 @@ def encryptFile():
     with open("document.txt") as f:
         # pull each line out
         for line in f:
+            line.strip("\n")
             new_line = ''
             # pull each char out of the line
             for char in line:
@@ -133,7 +137,8 @@ def encryptFile():
                 new_char = code[char]       #.rstrip("\n")
                 new_line += new_char
             # write new line str to encrypted file
-            e_file.write(str(new_line) + '\n')
+            e_file.write(new_line)
+            print(new_line, end='')
 
     #ALWAYS CLOSE THE FILE
     e_file.close()
@@ -151,21 +156,24 @@ def getUnique():
     unique = set()
     with open("unique.txt") as f:
         for line in f:
-            split = ([line.split(' ')])
-            for l in split:
-                new_list = []
-                for word in l:
-                    word.rsplit('/n')
-                    print(word)
-                    new_list.append(word)
-                print(new_list)
-                unique.update(new_list)
+            fix = line.replace('\n', '')
+            fix = fix.replace('.', '')
+            fix = fix.replace(',', '')
+            fix = fix.replace('(', '')
+            fix = fix.replace(')', '')
+            split = (fix.split(' '))
+            if '' in split:
+                split.remove('')
+            new_list = []
+            for word in split:
+                new_list.append(word)
+            unique.update(new_list)
             
     print(unique)
 #import string
 #for c in string.punctuation:
 #...     s= s.replace(c,"")
-getUnique()
+#getUnique()
 
 
 
@@ -176,13 +184,68 @@ number of times each word appears. For example, if the word “the” appears 12
 the dictionary would contain an element with 'the' as the key and 128 as the value.
 The program should either display the frequency of each word or create a second file
 containing a list of each word and its frequency
+https://lipsum.com/
+'''
+def getWordFreq():
+    word_freq = {}
+    with open("unique2.txt") as f:
+        for line in f:
+            fix = line.replace('\n', '')
+            fix = fix.replace('.', '')
+            fix = fix.replace(',', '')
+            fix = fix.replace('(', '')
+            fix = fix.replace(')', '')
+            split = (fix.split(' '))
+            if '' in split:
+                split.remove('')
+            for word in split:
+                lower = word.lower()
+                if lower in word_freq:
+                    word_freq[lower] += 1
+                else:
+                    word_freq[lower] = 1
+    for key, value in word_freq.items():
+        print(key, value, '\t', end='')
 
+#getWordFreq()
+'''
 6. File Analysis
 Write a program that reads the contents of two text files and compares them in the following ways:
-• It should display a list of all the unique words contained in both files.
-• It should display a list of the words that appear in both files.
-• It should display a list of the words that appear in the first file but not the second.
-• It should display a list of the words that appear in the second file but not the first.
-• It should display a list of the words that appear in either the first or second file but not both.
+• It should display a list of all the unique words contained in both files.             XXX
+• It should display a list of the words that appear in both files.             XXX
+• It should display a list of the words that appear in the first file but not the second.             XXX
+• It should display a list of the words that appear in the second file but not the first.             XXX
+• It should display a list of the words that appear in either the first or second file but not both.             XXX
 Hint: Use set operations to perform these analyses.
 '''
+
+def getCompareFiles():
+    first = getSet('unique2.txt')
+    second = getSet('compare2.txt')
+    
+    print(f'\nUnique words in unique2.txt: {first}')
+    print(f'\nUnique words in compare.txt: {second}')
+    print(f'\nWord in both files: {first & second}')                              #first.intersection(second)
+    print(f'\nWords in first file (but not second): {first.difference(second)}')  #first - second
+    print(f'\nWords in second file (but not first): {second.difference(first)}')  #second - first
+    print(f'\nWords in either the first or second file but not both: {first ^ second}\n')   #
+
+def getSet(p_file_name):
+    my_set = set()
+    with open(p_file_name) as f:
+        for line in f:
+            fix = line.replace('\n', '')
+            fix = fix.replace('.', '')
+            fix = fix.replace(',', '')
+            fix = fix.replace('(', '')
+            fix = fix.replace(')', '')
+            split = (fix.split(' '))
+            if '' in split:
+                split.remove('')
+            new_list = []
+            for word in split:
+                new_list.append(word)
+            my_set.update(new_list)
+    return my_set
+
+#getCompareFiles()

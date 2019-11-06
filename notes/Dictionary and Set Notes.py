@@ -310,4 +310,4 @@ def secondSet():
     print('superset', set12.issuperset(set13))          #set 13 is a subset of set12    True
     print('superset', set13.issuperset(set12))          #set 12 is a subset of set13    False
 
-#secondSet()
+secondSet()
