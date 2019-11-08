@@ -49,16 +49,23 @@ import random
 import pickle
 
 def hangman():
+    # initalize variables
     wrong_letters = []
     end = False
     profile_dict = getProfiles()
+    # show leaderboard
     getDisplay(profile_dict)
     user = input('Enter your username: ')
-    char_list = getCharList(getRandWord())                           # input('Have friend enter word: ')
-    while len(wrong_letters) < 6 and end == False:    
+    # get your word (either from user or word bank)
+    char_list = list(getRandWord())                           # input('Have friend enter word: ')
+    # loop until lose or win
+    while len(wrong_letters) < 6 and end == False:
+        # display board    
         displayBlanks(char_list)
+        # get guess and test it
         char_list, wrong_letters = testGuess(char_list, wrong_letters)
-        print(f"\nWrong Letters: {(', '.join(wrong_letters)).upper()}\nGuesses Left: {str(6-len(wrong_letters))}\n")
+        print(f"\nWrong Letters: {(', '.join(wrong_letters)).upper()}\n" \
+            f"Guesses Left: {str(6-len(wrong_letters))}\n")
         # display win and get out of loop
         if ''.join(char_list).isupper():
             displayBlanks(char_list)
@@ -67,12 +74,11 @@ def hangman():
     # check if max guess reached, display loss
     if len(wrong_letters) == 6:
         print(f"You Lose! The word was {''.join(char_list).upper()}")
-        end = '1'
-        print(end)
-    updateProfile(user, 6-len(wrong_letters), profile_dict)   #6-len(wrong_letters) == score
+    # update profile with user stats
+    updateProfile(user, 6-len(wrong_letters), profile_dict)
 
+# get profile dict from file with pickle
 def getProfiles():
-    # get GAL from contacts.txt thru function
     profiles = {}
     # open in non closing way
     with open('profiles.txt', 'rb') as f:
@@ -87,73 +93,93 @@ def getProfiles():
                 end_of_file = True
     return profiles
 
+# show leaderboard
 def getDisplay(p_profiles):
     print('Description of Hangman and Rules\n')
     print('   Leader Board \n-------------------')
     for key, value in p_profiles.items():
-        print(f'{key:^10} {value:^10}')
+        print(f'{key.title():^10} {value:^10}')
     print()
 
+# update profile dict with user and score
 def updateProfile(p_user, p_score, p_profiles):
+    # check if user already in the dict, then add points
     if p_user in p_profiles.keys():
         p_profiles[p_user] += p_score
     else:
         p_profiles[p_user] = p_score
+    # write to file with pickle
     with open('profiles.txt', 'wb') as out:
         # write changes to file in binary
         pickle.dump(p_profiles, out)
 
+# pull data from document and get random choice
 def getRandWord():
+    # open as read only
     with open('randhang.txt', 'r') as f:
         word_list = f.read()
+    # pick random word/phrase
     rand_word = random.choice(word_list.split('\n'))
+    # return the value
     return rand_word
 
-def getCharList(p_word):
-    # loop thru word to create a char list
-    letters = []
-    for char in p_word.lower():
-        letters += char
-    return letters
-
+# loop through the char list to display dashs, etc
 def displayBlanks(p_word):
-    #loop through the char list to display dashs, etc
+    # loop through char list and check each letter 
     for value in p_word:
+        # if lower print an underscore
         if value.islower():
             print('_', end=" ")
+        # if upper or space, print the letter
         elif value.isupper() or value == ' ':
             print(value, end=" ")
     print()
 
+# error check the guess for letter and not guessed yet
 def checkGuess(p_wrong):
-    # error check the guess for letter and not guessed yet
+    # intialize value for loop
     check = True
     while check == True:
+        # get input letter from user
         guess = input('\nEnter a letter to guess: ')
+        # check if it is in bad letter list
         if guess in p_wrong:
             print(f"Already Guessed {guess.upper()}!")
+        # check if it is alpha or more than one
         elif not(guess.isalpha()) or len(guess) != 1:
             print('You must enter a single letter (a-z)!')
+        # passed all test and end loop
         else:
             check = False
+    # pass the guess variable on to Test
     return guess
 
+# test each letter against guess and replace with uppercase if good guess
 def testGuess(p_word, p_wrong):
-    # test each letter against guess and replace with uppercase if good guess
+    # use function to get and error check guess
     guess = checkGuess(p_wrong)
+    # set up counting variables
     index = 0
     fails = 0
+    # loop through each character in the string(list)
     for char in p_word:
+        # lower = the original word; upper = the correct guesses
         if char == guess.lower():
             p_word[index] = char.upper()
         elif char == guess.upper():
+            # error checks if they enter the same right answer twice
             print(f'\nAlready Guessed: {guess.upper()}')
         else:
+            #tracks if all matches were wrong
             fails += 1
+        # accumulator used to replace letter with correct guess
         index += 1
+    #checks if each match was wrong
     if fails == len(p_word):
+        # adds bad guess to wrong letter list
         p_wrong.append(guess)
         print(f'\n{guess.upper()} was Wrong!')
+    #returns the char list and the bad letters
     return p_word, p_wrong
 
 
