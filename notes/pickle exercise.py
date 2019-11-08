@@ -1,13 +1,11 @@
-"""
-​
+"""​
 8. Name and Email Addresses
 Write a program that keeps names and email addresses in a dictionary as key-value pairs.
 The program should display a menu that lets the user look up a person’s email address, add
 a new name and email address, change an existing email address, and delete an existing
 name and email address. The program should pickle the dictionary and save it to a file
 when the user exits the program. Each time the program starts, it should retrieve the dictionary from the file and unpickle it.
-​
-"""
+​"""
 import pickle
 FILE = 'contacts.txt'
 
@@ -38,7 +36,7 @@ def main():
 
 def display_menu():
     #display menu and return choice
-    task = int(input("Do you want to: \n1. Look up a person’s email address (enter 1)\n2. Add new contact to the GAL (enter 2)\n3. Change an existing email(enter 3)\n4. Delete an existing name and email address (enter 4)\n"))
+    task = int(input("Do you want to: \n1. Look up a person’s email address \t\t(enter 1)\n2. Add new contact to the GAL \t\t\t(enter 2)\n3. Change an existing email \t\t\t(enter 3)\n4. Delete an existing name\\email address \t(enter 4)\n"))
     return task
 
 
@@ -53,7 +51,6 @@ def read_contacts():
             try:
                 # unpickle the next object
                 gal.update(pickle.load(f))
-
             except EOFError:
                 # set the flag to indicate the end of the file has been reached
                 end_of_file = True
@@ -63,13 +60,10 @@ def read_contacts():
 def look_up():
     # get GAL from contacts.txt thru function
     gal = read_contacts()
-
     #get input on what to look up from user
     search = input('Enter name to search for: ')
-
     # search for string with .get
     answer = gal.get(search, 'Entry Not Found')
-    
     # if the answer is found display or have them go back to menu
     if answer != 'Entry Not Found':
         print(f"{search}'s email address is {answer}")

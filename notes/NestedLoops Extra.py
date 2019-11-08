@@ -65,7 +65,7 @@ Write a program that draws 10 circles with centers (0, 0). Like below
 import turtle
 def drawCircles():
     turtle.showturtle()
-    circum = 100
+    circum = 50
     spot = -10
     while circum < 150:
         turtle.penup()
