@@ -464,6 +464,7 @@ def view_contacts(address_book):
         print(f"{name}")
         print(f"{email}")
         print('')
+
 ​
 def camarata():
     # load the address book
