@@ -174,6 +174,8 @@ def retail():
     
 #retail()
 
+
+
 """
 6. Employee Management System
     This exercise assumes that you have created the Employee class for Programming Exercise 4.
@@ -358,6 +360,52 @@ def add_cart():
  
 #retail_register()
 
+
+# from retail.py import my two classes called CashRegister and RetailItem
+from Classes_Exer_class import CamCashRegister 
+from Classes_Exer_class import CamRetailItem
+
+def cam_retail_register():
+    # if __name__ == "__main__":
+    # set up initial inventory
+    # RetailItem(name string, quantity int, price float)
+    gold_chain = CamRetailItem('Gold Chain', 12, 59.95)
+    beverage = CamRetailItem('Skol Vodka', 40, 34.95)
+    track_suit = CamRetailItem('Adidas Track Suit', 30, 99.98)
+    cigarettes = CamRetailItem('Cheap Cigarettes', 154, 3.99)
+
+    # show example RetailItem
+    # override __str__ in the class definition so we don't get
+    # <retail.RetailItem object at 0x0000020329362910>
+    print(beverage)
+    print('')
+
+    cr = CamCashRegister()
+
+    # user makes several purchases, default quantity is 1
+    # purchase_item(RetailItem object[, quantity int])
+    cr.purchase_item(gold_chain)
+    cr.purchase_item(beverage)
+    cr.purchase_item(track_suit, 4)
+    
+    # price increase on "beverage"
+    beverage.price = 44.95
+    # they have a problem
+    cr.purchase_item(beverage)
+    # show current register purchase history
+    cr.show_items()
+    print('')
+    # show example RetailItem after purchase
+    print(beverage)
+    print('')
+    beverage.price = 44.95
+    print('Clearing purchase history.')
+    print('')
+    cr.clear_items()
+    # show register purchase history after clearing
+    cr.show_items()
+
+cam_retail_register()
 """
 8. Trivia Game
     In this programming exercise you will create a simple trivia game for two players. The program will 
@@ -454,7 +502,7 @@ def save_pickle_2():
 
 #trivia_game()
 
-    '''
+"""
     count = 0
     questions = [['What do herpetologists study?', ['1. Herpes', '2. Blood', '3. Reptiles and amphibians', '4. Insects'], '3'], ['What is the function of mitochondria in the cell?', ['1. To generate energy', '2. To process waste', '3. To kill viruses or other antigens', '4. To repair damage'], '1'], ['What is Andromeda?', ['1. A bacteria that can cause death', '2. An array of radio telescopes', '3. An element of the Periodic Table', '4. The nearest major galaxy to the Milky Way '], '4'], ['What is the largest moon in the Solar System?', ["1. The Earth's Moon", '2. Ganymede ', '3. Pluto', '4. Europa'], '2'], ['How long does it take light to travel from the Sun to the Earth?', ["1. It's instantaneous", '2. About 11 days', '3. About 8 minutes', '4. 2-3 months, depending on the time of year'], '3'], ['Which of these noble ranks is highest?', ['1. Baron', '2. Earl', '3. Marquis', '4. Duke'], '4'], ['The U.S. state of New Jersey is named after Jersey. But what is Jersey?', ['1. A British island off the coast of France', '2. A Dutch province', '3. A Native American tribe', '4. There are multiple theories - no one is sure'], '1'], ['Who killed Greedo?', ['1. Hannibal Lecter', '2. Han Solo', '3. Hermione Granger', '4. Hercules'], '2'], ['How many moons does Mars have?', ['1. 1', '2. 2', '3. 3', '4. None'], '2'], ['Which of these is NOT caused by a virus?', ['1. Smallpox', '2. Cholera', '3. Measles', '4. Herpes'], '2'], ['What is a pomelo?', ['1. An old-fashioned punching bag', '2. A breed of dog', '3. The largest citrus fruit ', '4. Something that cheerleaders hold'], '3'], ['In the nursery rhyme, how many blackbirds were baked in a pie?', ['1. 4', '2. 11', '3. 24', '4. 99'], '3'], ['What are the main colors on the flag of Spain?', ['1. Black and yellow', '2. meh', '3. Really Stupid', '4. Correct'], '4'], ['What is Question 14?', ['1. stupid', '2. Correct', '3. meh', '4. Really Stupid'], '2'], ['What is Question 15?', ['1. stupid', '2. meh', '3. Correct', '4. Really Stupid'], '3'], ['What is Question 16?', ['1. stupid', '2. meh', '3. Correct', '4. Really Stupid'], '3'], ['What is Question 17?', ['1. stupid', '2. meh', '3. Correct', '4. Really Stupid'], '3'], ['What is Question 18?', ['1. stupid', '2. meh', '3. Correct', '4. Really Stupid'], '3'], ['What is Question 19?', ['1. stupid', '2. meh', '3. Correct', '4. Really Stupid'], '3'], ['What is Question 20?', ['1. stupid', '2. meh', '3. Correct', '4. Really Stupid'], '3']]
     for each in questions:
@@ -467,7 +515,7 @@ def save_pickle_2():
     #for key, value in ques_dict.items():
         #print(key)
         #print(value)
-    """
+"""
 
 """
 player1_pts = 0

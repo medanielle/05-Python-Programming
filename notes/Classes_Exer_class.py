@@ -219,6 +219,49 @@ class CashRegister:
     #def __str__(self):
         #return f'Description: {self.__desc}\nUnits: {self.__units}\nPrice: ${self.__price:.2f}\n'
 
+class CamRetailItem:
+    # all values are required and have no defaults
+    def __init__(self, name, units, price):
+        self.name = str(name)
+        self.units = int(units)
+        self.price = float(price)
+    # show a nice formatted string when printing the raw object
+    def __str__(self):
+        return f"{self.name} ${self.price:.2f} ({self.units})"
+class CamCashRegister:
+    # purchase history starts empty
+    def __init__(self):
+        self.purchase_history = []
+    # add a purchase dictionary to the purchase_history list
+    # pull out price and quantity as an items price can change but
+    # not what it was purchased at
+    # drop the RetailItem instance's quantity by the quantity purchased
+    def purchase_item(self, retail_item, quantity=1):
+        retail_item.units -= quantity
+        self.purchase_history.append({
+            'item': retail_item,
+            'price': retail_item.price,
+            'quantity': quantity
+        })
+    # return all items purchased and multiply it by their quantity
+    def get_total(self):
+        '''
+        total_price = 0
+        for item in self.purchase_history:
+            total_price += item['price'] * item['quantity']
+        return total_price
+        '''
+        # the above and below code return the same value
+        # https://wiki.python.org/moin/Generators
+        return sum(item['price'] * item['quantity'] for item in self.purchase_history)
+        # print out purchase history info and just call get_total() to figure out the overall total.
+    def show_items(self):
+        for item in self.purchase_history:
+            print(f"Sale: ({item['quantity']}) {item['item'].name} for ${item['price']:.2f} totaling ${item['price'] * item['quantity']:.2f}")
+        print(f"Overall Total: ${self.get_total():.2f}")
+    # start with a list, end with a list
+    def clear_items(self):
+        self.purchase_history = []
 """
 To create this program, write a Question class to hold the data for a trivia question. The
     Question class should have attributes for the following data:
