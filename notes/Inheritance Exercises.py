@@ -16,29 +16,33 @@
 
 """
 class Employee:
+    # initalize attributes
     def __init__(self, emp_name, emp_num):
         self.__emp_name = emp_name
         self.__emp_num = emp_num
-    
+    # mutators
     def set_name(self, emp_name):
         self.__emp_name = emp_name
     def set_emp_num(self, emp_num):
         self.__emp_num = emp_num
+    # accessors
     def get_name(self):
         return self.__emp_name
     def get_emp_num(self):
         return self.__emp_num
 
 class ProductionWorker(Employee):
+    # initalize attributes and get superclasses's attributes
     def __init__(self, name, emp_num, shift_num, pay_rate):
         Employee.__init__(self, name, emp_num)
         self.__shift_num = shift_num
         self.__pay_rate = pay_rate
-    
+    # mutators
     def set_shift_num(self, shift_num):
         self.__shift_num = shift_num
     def set_pay_rate(self, pay_rate):
         self.__pay_rate = pay_rate
+    # accessors
     def get_shift_num(self):
         return self.__shift_num
     def get_pay_rate(self):
@@ -48,13 +52,16 @@ class ProductionWorker(Employee):
         #return f'\nName: {.__emp_name}\nEmployee Num: {self.__emp_num}\nShift Number: {self.__shift_num}\nPay Rate: {self.__pay_rate}'
 
 def get_prod_work():
+    # get data
     name = input("Enter the Worker's Name: ")
     num = int(input("Enter Worker's Employee NUmber: "))
     shift = int(input("Enter Shift (day=1/night=2): "))
     pay = float(input("Enter Worker's Pay Rate: "))
-    #print(name, num, shift, pay)
+    # create object
+    # print(name, num, shift, pay)
     prod_worker = ProductionWorker(name, num, shift, pay)
-    #print(prod_worker)
+    # print(prod_worker)
+    # display object data
     print(f'\nName: {prod_worker.get_name()}\nPay Rate: ${prod_worker.get_pay_rate():.2f}\nEmployee Num: {prod_worker.get_emp_num()}\nShift Number: {prod_worker.get_shift_num()}')
 
 #get_prod_work()
@@ -75,17 +82,20 @@ def get_prod_work():
 
 """
 class ShiftSupervisor(Employee):
+    # initalize attributes and get superclasses's attributes
     def __init__(self, name, emp_num, shift_num, salary, bonus):
         Employee.__init__(self, name, emp_num)
         self.__shift_num = shift_num
         self.__salary = salary
         self.__bonus = bonus
+    # mutators
     def set_shift_num(self, shift_num):
         self.__shift_num = shift_num
     def set_salary(self, salary):
         self.__salary = salary
     def set_bonus(self, bonus):
         self.__bonus = bonus
+    # accessors
     def get_bonus(self):
         return self.__bonus
     def get_salary(self):
@@ -94,16 +104,15 @@ class ShiftSupervisor(Employee):
         return self.__shift_num
 
 def get_shift_sup():
+    # get info
     name = input("Enter the Worker's Name: ")
     num = int(input("Enter Worker's Employee NUmber: "))
     shift = int(input("Enter Shift (day=1/night=2): "))
     sal = int(input("Enter Annual Salary: "))
     bonus =  int(input("Enter Production Bonus: "))
-
-
+    # create object
     shift_super = ShiftSupervisor(name, num, shift, sal, bonus)
-
-
+    # display object data
     print(f'\nName: {shift_super.get_name().title()}\nPay Rate: {shift_super.get_salary():,}\nProduction Bonus: {shift_super.get_bonus():,}\nEmployee Num: {shift_super.get_emp_num()}\nShift Number: {shift_super.get_shift_num()}')
 
 # get_shift_sup()
@@ -118,18 +127,19 @@ def get_shift_sup():
 """
 
 class Person:
+    # initalize attributes
     def __init__(self, name, addr, tele):
         self.__name = name
         self.__addr = addr
         self.__tele = tele
-    
+    # mutators
     def set_name(self, name):
         self.__name = name
     def set_addr(self, addr):
         self.__addr = addr
     def set_tele(self, tele):
         self.__tele = tele
-
+    # accessors
     def get_tele(self):
         return self.__tele
     def get_addr(self):
@@ -138,30 +148,51 @@ class Person:
         return self.__name
 
 class Customer(Person):
+    # initalize attributes and get superclasses's attributes
     def __init__(self, name, addr, tele, num, mail):
         super().__init__(name, addr, tele)
         self.__num = num
         self.__mail = mail
-
-    
+    # mutators
     def set_num(self, num):
         self.__num = num
     def set_mail(self, mail):
         self.__mail = mail
-
+    # accessors
     def get_mail(self):
         return self.__mail
     def get_num(self):
         return self.__num
 
 def get_customer():
+    # get info
     name = input("Name: ")
     addr = input("Mailing address: ")
     tele = input("Telelphone Number: ")
     num = int(input("Customer ID Number: "))
     mail =  bool(int(input("Mailing list? Yes = 1 & No = 0: ")))
+    # create object
     new_cust = Customer(name, addr, tele, num, mail)
-
+    # display object data
     print(f'\nCustomer Info\n----------------\nName: {new_cust.get_name()}\nMailing address: {new_cust.get_addr()}\nTelelphone Number: {new_cust.get_tele()}\nCustomer ID Number: {new_cust.get_num()}\nMailing list: {new_cust.get_mail()}')
 
-get_customer()
+#get_customer()
+
+"""
+4. Chick-fil-a vs Popeye's Chicken Sandwich Quest
+    Using a superclass of Person with two subclasses Student and Instructor create a program that determines
+    who is going to go where and how we'll grade the sandwiches and determine a winner.
+    Get creative with this one. Add in some methods and have fun with it. I'll leave 
+    this open to see what you come up with. 
+	
+"""
+
+class Student(Person):
+    def __init__(self, name, addr, tele):
+        super().__init__(name, addr, tele)
+
+
+class Instructor(Person):
+    def __init__(self, name, addr, tele):
+        super().__init__(name, addr, tele)
+
