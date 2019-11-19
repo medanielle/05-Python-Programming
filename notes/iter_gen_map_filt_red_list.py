@@ -265,7 +265,7 @@ def my_list_comp():
 
 def my_other_comp():
     # set comprehension
-    nums = [1,1,2,1,3,9,4,5,5,6,7,7,8,9,10]
+    nums = [1, 1, 2, 1, 3, 9, 4, 5, 5, 6, 7, 7, 8, 9, 10]
     my_set = set()
     for n in nums:
         my_set.add(n)
@@ -317,12 +317,37 @@ def gen_func(nums):
         yield n*n
 
 my_gen_var = gen_func(nums)
-print(next(my_gen_var))
-print(next(my_gen_var))
+#print(next(my_gen_var))
+#print(next(my_gen_var))
 
 my_gen2 = (n*n for n in nums)
-for i in my_gen2:
-    print(i)
+#for i in my_gen2:
+#    print(i)
 
 
+# enumerate
 
+# iterates over different types of iterable objects and returns both the index and value for each item
+
+def enum_names():
+    names = ['Daniel', 'Joe', 'Jim','Travis']
+    print(list(enumerate(names)))
+    print(list(enumerate(names, start=4)))
+    for name in enumerate(names, start=6):
+        print(name)
+    for count, item in enumerate(names, 100):
+        print(f"Count: {count} \tItem: {item}")
+
+def second_enum():
+    my_str = 'Enumerate is Powerful'
+    for idx, ch in enumerate(my_str):
+        print(f'Index is {idx} anch Character is {ch}')
+
+def enum_dict():
+    #dictionary comprehnsion with enumerate
+    names = ['Daniel', 'Joe', 'Jim','Travis']
+    my_dict = {k: v for k, v in enumerate(names)}
+    print(my_dict)
+    my_dict_cond = {k: v for k, v in enumerate(names) if v.startswith('D')}
+    print(my_dict_cond)
+enum_dict()

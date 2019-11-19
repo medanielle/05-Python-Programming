@@ -86,7 +86,7 @@ def getAvgRain():
     print(f'\nNumber of months: {months}\nTotal Rainfall (in inches): {totalRain}' 
             f'\nAverage rain per month: {totalRain/months}')
 
-#getAvgRain()
+getAvgRain()
 '''
 6. Celsius to Fahrenheit Table
 Write a program that displays a table of the Celsius temperatures 0 through 20 and their
@@ -124,7 +124,7 @@ def pennyADay():
         salary *= 2
     print(f'\nTotal Salary = ${totalMoney:.2f}')
 
-pennyADay()
+#pennyADay()
 '''
 8. Sum of Numbers
 Write a program with a loop that asks the user to enter a series of positive numbers. The
@@ -185,4 +185,4 @@ def pattern_draw():
         spaces += 1
         print(f'{pattern}')
 
-pattern_draw()
+#pattern_draw()

@@ -173,7 +173,7 @@ Quantity Discount
 50–99       40%
 100 or more 50% 
 Write a program that asks the user to enter the number of packages purchased. The program should 
-then display the amountof the discount (if any) and the total amount of thepurchase after the discount. 
+then display the amountof the discount (if any) and the total amount of the purchase after the discount. 
 
 9. Shipping Charges
 The Fast Freight Shipping Company charges the following rates: 
