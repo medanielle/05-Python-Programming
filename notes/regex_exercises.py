@@ -83,15 +83,22 @@ Keywords in Python:
 ​
 (False) | (class) | (finally) | (is) | (return) | (None) | (continue) ) | (
 """
-
-
-
+import keyword
 def find_identifiers():
-    string = ''' False 1variablE @vARIABLE variable apple'''
-    pattern = re.compile(r'(\s[a-zA-z]+) | (?!False)')
-    # '(False) | (class) | (finally) | (is) | (return) | (None) | (continue) | (\d+) | '
-    listy = pattern.findall(string)
+    string = ''' False 1variablE v@RIABLE variable apple'''
+    pattern = re.compile(r'(\s)([\W\D][a-zA-z_]+)')
+    # (r'^(?!' + keywords + r'|\W[a-zA-Z]' )
+    matches = pattern.finditer(string)
+    listy = []
+    
 
+    for match in matches:
+        print(match.group(2))
+        if match.group(2) in keyword.kwlist:
+            pass
+        else:
+            listy.append(match.group(2))
+    
     print(listy)
 
 # find_identifiers()
@@ -101,8 +108,9 @@ your regex general enough to match any number of street
 words, including the type designation). For example, American
 street addresses use the format: 1180 Bordeaux Drive. Make
 your regex flexible enough to support multi-word street
-names such as: 3120 De la Cruz Boulevard.
+names such as: 3120 De la Cruz Boulevard.       (Street|Drive|Boulevard)
 """
+
 def find_addr():
     string = """
     1234 Place Street
@@ -110,13 +118,12 @@ def find_addr():
     3120 De la Cruz Boulevard
     """
 
-    pattern = re.compile(r'(\d+)([a-zA-z ]+)(Street|Drive|Boulevard)')
-    matches = pattern.findall(string)
+    pattern = re.compile(r'(\d+)([a-zA-z ]+)( \w+)')
+    matches = pattern.finditer(string)
     for match in matches:
-        print(match)
+        print(match.group(0,1,2,3))
 
-
-# find_addr()
+#find_addr()
 
 """
 6. Match simple Web domain names that begin with “www.”
@@ -125,22 +132,22 @@ Extra Credit: If your regex also supports other high-level
 domain names, such as .edu, .net, etc. (for example,
 www.foothill.edu).
 """
-urls = """
-http://testsite.com
-https://www.google.com
-https://youtube.com
-https://www.nasa.gov
-www.website.com
-"""
 
-def find_urls_groups():
-    pattern = re.compile(r'(https?://)?(www\.)?(\w+)(\.\w+)')
+def find_domains():
+    urls = """
+    http://testsite.com
+    https://www.google.com
+    https://youtube.com
+    https://www.nasa.gov
+    www.website.com
+    """
+    pattern = re.compile(r'(www\.)?(\w+)(\.\w+)')
     matches = pattern.finditer(urls)
 
     for match in matches:
-        print(match.group(0, 1, 2, 3, 4))
+        print(match.group(2))
 
-# find_urls_groups()
+#find_domains()
 
 """
 7. Match the set of all valid e-mail addresses (start with a loose
@@ -149,21 +156,20 @@ maintain correct functionality). Try to break what we did in class
 and improve it.
 """
 
-email = """ 
-TestUser@gmail.com
-test.user@school.edu
-test-123-user@this-place.net
-bademail@.com
-"""
-
 def find_emails_mine():
+    email = """ 
+    TestUser@gmail.com
+    test.user@school.edu
+    test-123-user@this-place.net
+    bademail@.com
+    """
     pattern = re.compile(r'([a-zA-Z.0-9-_+]+)(@[a-zA-Z.0-9-_]+)(\.[a-zA-Z.0-9-_]+)')
     matches = pattern.finditer(email)
 
     for match in matches:
         print(match.group(0))
 
-find_emails_mine()
+#find_emails_mine()
 
 """
 8. Match the set of all valid Web site addresses (URLs) (start
@@ -171,6 +177,26 @@ with a loose regex, and then try to tighten it as much as you
 can, yet maintain correct functionality).Try to break what we did in 
 class and improve it.
 """
+# repeat ????
+
+
+
+def find_urls_groups():
+    urls = """
+    http://testsite.com
+    https://www.google.com
+    https://youtube.com
+    https://www.nasa.gov
+    www.website.com
+    """
+    pattern = re.compile(r'(https?://)?(www\.)?(\w+)(\.\w+)')
+    # george = (r'(https?://)?(www\.)?(\w+)(\.\w+)((/[\w&?=.\-:]+)*)')
+    matches = pattern.finditer(urls)
+
+    for match in matches:
+        print(match.group(0))
+
+#find_urls_groups()
 
 
 """
@@ -191,15 +217,24 @@ the string. Your function should take a string like this <type
 are implementing the value that is stored in the __name__
 attribute for classes and some built-in types.
 """
-types - """
-<class 'int'>
-<class 'str'>
-<class 'builtin_function_or_method'>
-<class 'float'>
-"""
+
 def get_type():
+    types = """
+    <class 'int'>
+    <class 'str'>
+    <class 'builtin_function_or_method'>
+    <class 'float'>
+    """
+    pattern = re.compile(r"(<class ')([a-z_]+)('>)")
+    matches = pattern.finditer(types)
+    for match in matches:
+        print(match.group(2))
 
+    # stuff = re.findall(r"'(.*?)", types)
+    # for match in stuff:
+    #     print(match)
 
+#get_type()
 """
 11. Processing Dates. In Section 1.2, we gave you the regex pattern
 that matched the single or double-digit string representations of
@@ -207,3 +242,12 @@ the months January to September (0?[1-9]). Create the regex
 that represents the remaining three months in the standard
 calendar.
 """
+
+def find_dig_mon():
+    months="""01 02 03 04 05 06 07 08 09 10 11 12
+    """
+    pattern = re.compile(r'(1[0-2])|(0?[1-9])')
+    matches = pattern.finditer(months)
+    for match in matches:
+        print(match)
+# find_dig_mon()
