@@ -92,7 +92,7 @@ def my_map():
     print(next(sqr_list))
     # next(sqr_list)
 
-#my_map()
+my_map()
 
 # lambda functions
 # temporary one liner anonymous functions (can't call again after it is used)
